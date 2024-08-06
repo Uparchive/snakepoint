@@ -1380,40 +1380,8 @@ function toggleObjectives() {
     }
 }
 
-// Função para detectar se o dispositivo é móvel
-function isMobile() {
-    return /Mobi|Android/i.test(navigator.userAgent);
-}
-
-// Funções para mover a cobra com os controles responsivos
-function moveSnake(direction) {
-    if (direction === 'up' && direction.y === 0) nextDirection = { x: 0, y: -1 };
-    if (direction === 'down' && direction.y === 0) nextDirection = { x: 0, y: 1 };
-    if (direction === 'left' && direction.x === 0) nextDirection = { x: -1, y: 0 };
-    if (direction === 'right' && direction.x === 0) nextDirection = { x: 1, y: 0 };
-}
-
-// Adicionar event listeners aos botões de controle
-function addMobileControls() {
-    document.getElementById('upButton').addEventListener('click', () => moveSnake('up'));
-    document.getElementById('downButton').addEventListener('click', () => moveSnake('down'));
-    document.getElementById('leftButton').addEventListener('click', () => moveSnake('left'));
-    document.getElementById('rightButton').addEventListener('click', () => moveSnake('right'));
-}
-
-// Mostrar controles móveis se o dispositivo for móvel
-if (isMobile()) {
-    document.getElementById('mobileControls').style.display = 'flex';
-    addMobileControls();
-}
-
-
 window.onload = function() {
     displayScoreHistory();
     document.getElementById('fullscreenButton').style.display = 'block';
     loadLevelProgress();
-    if (isMobile()) {
-        document.getElementById('mobileControls').style.display = 'flex';
-        addMobileControls();
-    }
 };
