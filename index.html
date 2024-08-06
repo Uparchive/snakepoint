@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snake Point</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="initialLogoContainer">
+        <img src="images/logo.png" alt="Logo do Jogo da Cobrinha" class="logo" id="initialLogo">
+    </div>
+    <header style="display: none;">
+        <img src="images/logo.png" alt="Logo do Jogo da Cobrinha" class="logo">
+        <h1>O Jogo da Cobrinha</h1>
+    </header>       
+    <div id="menu" style="display: none;">
+        <h2>Selecione um Modo de Jogo!</h2>
+        <label for="playerName">Nome do Jogador:</label>
+        <input type="text" id="playerName" placeholder="Digite seu nome">
+        <div class="toggle-container">
+            <span>Modo IA</span>
+            <label class="switch">
+                <input type="checkbox" id="iaToggle" onclick="toggleIA()">
+                <span class="slider round"></span>
+            </label>
+        </div>
+        <button id="storyModeButton">Modo História</button>
+        <button onclick="startGame('easy')">Fácil</button>
+        <button onclick="startGame('normal')">Normal</button>
+        <button onclick="startGame('hard')">Difícil</button>
+        <h2 onclick="toggleScoreHistory()">Histórico de Pontuações <span id="toggleArrow">▼</span></h2>
+        <ul id="scoreHistory" class="hidden"></ul>
+        <div id="scoreHistoryButtons" class="hidden">
+            <button onclick="exportScoreHistory()">Exportar Histórico</button>
+            <input type="file" id="importFile" style="display:none;" onchange="importScoreHistory(event)">
+            <button onclick="document.getElementById('importFile').click()">Importar Histórico</button>
+            <button onclick="clearScoreHistory()">Limpar Histórico</button>
+            <button id="resetHighScoresButton">Resetar Melhores Pontuações</button>
+        </div>
+    </div>
+    <div id="storyModeContainer" style="display: none;">
+        <h2>Seleção de Fases</h2>
+        <div id="levelSelection">
+            <div class="level" id="level1" onclick="startStoryModeLevel(1)">1</div>
+            <div class="level" id="level2" onclick="startStoryModeLevel(2)">2</div>
+            <div class="level" id="level3" onclick="startStoryModeLevel(3)">3</div>
+            <div class="level locked" id="level4">4</div>
+            <div class="level locked" id="level5">5</div>
+            <div class="level locked" id="level6">6</div>
+        </div>
+        <button onclick="backToMenu()">Voltar ao Menu</button>
+    </div>
+    <div id="scoreBoard" style="display: none;">
+        <p>Pontuação Atual: <span id="currentScore">0</span></p>
+        <div class="collapsible-content">
+            <p>Melhor Pontuação: <span id="highScore">0</span></p>
+            <p>Melhor Pontuação IA: <span id="highScoreAI">0</span></p>
+        </div>
+        <button id="toggleScoresButton" class="toggle-button" onclick="toggleScores()">Mostrar/Esconder Pontuações</button>
+    </div>
+    <div id="objectiveBoard" style="display: none;">
+        <p id="objectiveTitle">Objetivo:</p>
+        <div class="collapsible-objective">
+            <p><span id="objectiveApples">0/10</span></p>
+            <p><span id="objectivePowerApples">0/0</span></p>
+            <p><span id="objectiveYellowApples">0/0</span></p>
+        </div>
+        <button id="toggleObjectivesButton" class="toggle-button" onclick="toggleObjectives()">Mostrar/Esconder Objetivos</button>
+    </div>
+    <div id="congratsPopup" style="display: none;">
+        <div class="popup-content">
+            <h2>Parabéns!</h2>
+            <p>Você completou a fase com uma pontuação de <span id="finalScore"></span>!</p>
+            <div class="popup-buttons">
+                <button id="restartLevelButton">↩ Reiniciar</button>
+                <button id="backToMenuButtonCongrats">Voltar ao Menu</button>
+                <button id="nextLevelButton">Próxima Fase ↪</button>
+            </div>
+        </div>
+    </div>    
+    <div id="gameOverPopup" style="display: none;">
+        <div class="popup-content">
+            <h2>Game Over</h2>
+            <p>Você morreu com uma pontuação de <span id="finalScoreGameOver"></span>.</p>
+            <button id="restartButton">Reiniciar</button>
+            <button id="backToMenuButton">Voltar ao Menu</button>
+        </div>
+    </div>    
+    <canvas id="gameCanvas" style="display: none;"></canvas>
+    <button id="backButton" style="display: none;" onclick="backToMenu()">Voltar ao Menu</button>
+    <button id="fullscreenButton" style="display: none;" onclick="toggleFullscreen()">Tela Cheia</button>
+    
+    <div id="mobileControls" style="display: none;">
+        <button class="control-btn" id="upButton">↑</button>
+        <button class="control-btn" id="leftButton">←</button>
+        <button class="control-btn" id="downButton">↓</button>
+        <button class="control-btn" id="rightButton">→</button>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>

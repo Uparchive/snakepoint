@@ -1,0 +1,676 @@
+body {
+    font-family: 'Arial', sans-serif;
+    text-align: center;
+    background-color: #1a1a2e;
+    color: #e4e4e4;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+#initialLogoContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+#initialLogo {
+    width: 200px;
+    height: auto;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+#initialLogo:hover {
+    transform: scale(1.1);
+}
+
+header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.logo {
+    width: 200px;
+    height: auto;
+    margin-bottom: 20px;
+    border: 3px solid #e94560;
+    border-radius: 50%;
+    transition: transform 0.3s;
+}
+
+.logo:hover {
+    transform: scale(1.1);
+}
+
+h1 {
+    color: #e94560;
+    font-size: 3em;
+    margin: 0;
+}
+
+#menu {
+    background-color: #16213e;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    width: 90%;
+    max-width: 400px;
+    margin-bottom: 20px;
+    animation: fadeIn 1s ease-in-out;
+}
+
+#menu.show {
+    display: block;
+    animation: slideIn 0.5s forwards;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+#menu h2 {
+    color: #e94560;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+#menu label, #menu input {
+    display: block;
+    margin: 10px auto;
+    font-size: 1.2em;
+}
+
+#menu input {
+    padding: 10px;
+    width: 80%;
+    max-width: 300px;
+    border: 2px solid #e94560;
+    border-radius: 5px;
+    background-color: #1a1a2e;
+    color: #e4e4e4;
+    text-align: center;
+}
+
+#menu button, #backButton, #fullscreenButton {
+    padding: 15px 30px;
+    border: none;
+    border-radius: 5px;
+    background-color: #e94560;
+    color: #e4e4e4;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+    margin: 10px 0;
+    width: 80%;
+    max-width: 300px;
+}
+
+#menu button:hover, #backButton:hover, #fullscreenButton:hover {
+    background-color: #d7233a;
+    transform: scale(1.05);
+}
+
+#scoreBoard {
+    background-color: #16213e;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    width: 90%;
+    max-width: 400px;
+    margin-top: 20px;
+}
+
+#scoreBoard p {
+    margin: 10px 0;
+    font-size: 1.2em;
+}
+
+canvas {
+    border: 2px solid #e4e4e4;
+    background-color: #0f3460;
+    margin-top: 20px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    animation: fadeIn 1s ease-in-out;
+}
+
+ul#scoreHistory {
+    list-style: none;
+    padding: 0;
+    width: 90%;
+    max-width: 400px;
+    margin: 20px auto;
+    background-color: #16213e;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+ul#scoreHistory.hidden, #scoreHistoryButtons.hidden {
+    display: none;
+}
+
+ul#scoreHistory li {
+    padding: 10px;
+    border-bottom: 1px solid #1a1a2e;
+    color: #e4e4e4;
+}
+
+ul#scoreHistory li:last-child {
+    border-bottom: none;
+}
+
+.toggle-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px 0;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+    margin-left: 10px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+}
+
+input:checked + .slider {
+    background-color: #4CAF50;
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+#storyModeContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background-color: rgba(26, 26, 46, 0.9);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    width: 90%;
+    max-width: 600px;
+    margin: auto;
+    animation: fadeIn 1s ease-in-out;
+}
+
+#levelSelection {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.level {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+    height: 100px;
+    background-color: #e94560;
+    color: #fff;
+    font-size: 2em;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.3s, background-color 0.3s, box-shadow 0.3s;
+}
+
+.level:hover {
+    transform: scale(1.1);
+    background-color: #d7233a;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.level.locked {
+    background-color: #555;
+    cursor: not-allowed;
+    position: relative;
+}
+
+.level.locked::after {
+    content: '🔒';
+    position: absolute;
+    font-size: 1.5em;
+    color: #fff;
+}
+
+button {
+    padding: 15px 30px;
+    border: none;
+    border-radius: 5px;
+    background-color: #e94560;
+    color: #e4e4e4;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+    margin-top: 20px;
+}
+
+button:hover {
+    background-color: #d7233a;
+    transform: scale(1.05);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+#objectiveBoard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background-color: rgba(26, 26, 46, 0.9);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    color: #e4e4e4;
+    width: 90%;
+    max-width: 400px;
+    margin: 20px auto;
+    animation: fadeIn 1s ease-in-out;
+    box-sizing: border-box;
+}
+
+#objectiveBoard h2 {
+    color: #e94560;
+    margin-bottom: 20px;
+    font-size: 1.5em;
+    text-align: center;
+}
+
+#objectiveBoard p {
+    background: #16213e;
+    padding: 10px 15px;
+    border-radius: 5px;
+    width: 100%;
+    max-width: 360px;
+    text-align: center;
+    margin: 10px 0;
+    font-size: 1.2em;
+    color: #e4e4e4;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#objectiveBoard span {
+    color: #e94560;
+    font-weight: bold;
+    margin: 0 5px;
+}
+#congratsPopup, #gameOverPopup {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
+}
+
+.popup-content {
+    background-color: #16213e;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    color: #e4e4e4;
+    max-width: 90%;
+    width: 400px;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.popup-content h2 {
+    color: #e94560;
+    margin-bottom: 20px;
+}
+
+.popup-content button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #e94560;
+    color: #e4e4e4;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+    margin: 10px;
+}
+
+.popup-content button:hover {
+    background-color: #d7233a;
+    transform: scale(1.05);
+}
+
+.popup-buttons {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+#scoreBoard {
+    background-color: rgba(22, 33, 62, 0.9); /* Fundo semi-transparente */
+    padding: 20px;
+    border-radius: 15px; /* Borda arredondada */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5); /* Sombra */
+    width: 250px; /* Largura fixa */
+    position: fixed;
+    top: 20px; /* Margem superior */
+    right: 20px; /* Margem direita */
+    z-index: 10;
+    text-align: left; /* Alinhar texto à esquerda */
+    color: #ffffff; /* Cor do texto */
+    font-family: 'Arial', sans-serif; /* Fonte */
+    font-size: 1.2em; /* Tamanho da fonte */
+}
+
+.scoreLayer {
+    margin-bottom: 15px; /* Espaçamento entre camadas */
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.2); /* Fundo semi-transparente para as camadas */
+    border-radius: 10px; /* Borda arredondada para as camadas */
+}
+
+#scoreBoard p {
+    margin: 0; /* Remover margem dos parágrafos */
+    font-size: 1.1em; /* Tamanho da fonte */
+}
+
+#scoreBoard p span {
+    font-weight: bold; /* Negrito para os valores */
+    color: #ffcc00; /* Cor diferente para destaque */
+}
+
+#toggleScoresButton {
+    background-color: #ffcc00; /* Cor do botão */
+    color: #16213e; /* Cor do texto do botão */
+    border: none; /* Sem borda */
+    border-radius: 10px; /* Borda arredondada */
+    padding: 10px; /* Padding do botão */
+    cursor: pointer; /* Cursor de ponteiro */
+    text-align: center; /* Alinhar texto ao centro */
+    width: 100%; /* Largura total */
+    margin-top: 10px; /* Margem superior */
+}
+
+.collapsible-content {
+    display: none; /* Esconder por padrão */
+}
+#objectiveBoard {
+    background-color: rgba(22, 33, 62, 0.9); /* Fundo semi-transparente */
+    padding: 20px;
+    border-radius: 15px; /* Borda arredondada */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5); /* Sombra */
+    width: 250px; /* Largura fixa */
+    position: fixed;
+    top: 100px; /* Margem superior */
+    right: 20px; /* Margem direita */
+    z-index: 10;
+    text-align: left; /* Alinhar texto à esquerda */
+    color: #ffffff; /* Cor do texto */
+    font-family: 'Arial', sans-serif; /* Fonte */
+    font-size: 1.2em; /* Tamanho da fonte */
+}
+
+.objectiveLayer {
+    margin-bottom: 15px; /* Espaçamento entre camadas */
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.2); /* Fundo semi-transparente para as camadas */
+    border-radius: 10px; /* Borda arredondada para as camadas */
+}
+
+#objectiveBoard p {
+    margin: 0; /* Remover margem dos parágrafos */
+    font-size: 1.1em; /* Tamanho da fonte */
+}
+
+#objectiveBoard p span {
+    font-weight: bold; /* Negrito para os valores */
+    color: #ffcc00; /* Cor diferente para destaque */
+}
+
+#toggleObjectivesButton {
+    background-color: #ffcc00; /* Cor do botão */
+    color: #16213e; /* Cor do texto do botão */
+    border: none; /* Sem borda */
+    border-radius: 10px; /* Borda arredondada */
+    padding: 10px; /* Padding do botão */
+    cursor: pointer; /* Cursor de ponteiro */
+    text-align: center; /* Alinhar texto ao centro */
+    width: 100%; /* Largura total */
+    margin-top: 10px; /* Margem superior */
+}
+
+.collapsible-objective {
+    display: none; /* Esconder por padrão */
+}
+#scoreBoard, #objectiveBoard {
+    background-color: rgba(22, 33, 62, 0.9); /* Fundo semi-transparente */
+    padding: 20px;
+    border-radius: 15px; /* Borda arredondada */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5); /* Sombra */
+    width: 250px; /* Largura fixa */
+    position: fixed;
+    right: 20px; /* Margem direita */
+    z-index: 10;
+    text-align: left; /* Alinhar texto à esquerda */
+    color: #ffffff; /* Cor do texto */
+    font-family: 'Arial', sans-serif; /* Fonte */
+    font-size: 1.2em; /* Tamanho da fonte */
+}
+
+#scoreBoard {
+    top: 20px; /* Margem superior */
+}
+
+#objectiveBoard {
+    top: 100px; /* Margem superior */
+}
+
+.scoreLayer, .objectiveLayer {
+    margin-bottom: 15px; /* Espaçamento entre camadas */
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.2); /* Fundo semi-transparente para as camadas */
+    border-radius: 10px; /* Borda arredondada para as camadas */
+}
+
+#scoreBoard {
+    background-color: rgba(22, 33, 62, 0.9); /* Semi-transparent background */
+    padding: 15px; /* Padding */
+    border-radius: 15px; /* Rounded border */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5); /* Shadow */
+    width: 250px; /* Increased width */
+    position: fixed;
+    top: 20px; /* Top margin */
+    right: 20px; /* Right margin */
+    z-index: 10;
+    text-align: left; /* Align text to left */
+    color: #ffffff; /* Text color */
+    font-family: 'Arial', sans-serif; /* Font */
+    font-size: 1em; /* Font size */
+}
+
+#scoreBoard p {
+    margin: 0 0 10px 0; /* Margin to separate paragraphs */
+    font-size: 1em; /* Font size */
+    padding: 8px; /* Padding inside each score rectangle */
+    background-color: rgba(0, 0, 0, 0.3); /* Semi-transparent background for rectangles */
+    border-radius: 10px; /* Rounded corners for rectangles */
+}
+
+#scoreBoard p span {
+    font-weight: bold; /* Bold for values */
+    color: #ffcc00; /* Different color for highlight */
+}
+
+#toggleScoresButton {
+    background-color: #ffcc00; /* Button color */
+    color: #16213e; /* Button text color */
+    border: none; /* No border */
+    border-radius: 10px; /* Rounded border */
+    padding: 8px; /* Button padding */
+    cursor: pointer; /* Pointer cursor */
+    text-align: center; /* Center text */
+    width: 100%; /* Full width */
+    margin-top: 10px; /* Top margin */
+}
+
+.collapsible-content {
+    display: none; /* Hide by default */
+}
+#objectiveBoard {
+    background-color: rgba(22, 33, 62, 0.9); /* Semi-transparent background */
+    padding: 15px; /* Padding */
+    border-radius: 15px; /* Rounded border */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5); /* Shadow */
+    width: 250px; /* Width */
+    position: fixed;
+    top: 100px; /* Top margin */
+    right: 20px; /* Right margin */
+    z-index: 10;
+    text-align: left; /* Align text to left */
+    color: #ffffff; /* Text color */
+    font-family: 'Arial', sans-serif; /* Font */
+    font-size: 1em; /* Font size */
+}
+
+#objectiveBoard p {
+    margin: 0 0 10px 0; /* Margin to separate paragraphs */
+    font-size: 1em; /* Font size */
+    padding: 8px; /* Padding inside each objective rectangle */
+    background-color: rgba(0, 0, 0, 0.3); /* Semi-transparent background for rectangles */
+    border-radius: 10px; /* Rounded corners for rectangles */
+}
+
+#objectiveBoard p span {
+    font-weight: bold; /* Bold for values */
+    color: #ffcc00; /* Different color for highlight */
+}
+
+#toggleObjectivesButton {
+    background-color: #ffcc00; /* Button color */
+    color: #16213e; /* Button text color */
+    border: none; /* No border */
+    border-radius: 10px; /* Rounded border */
+    padding: 8px; /* Button padding */
+    cursor: pointer; /* Pointer cursor */
+    text-align: center; /* Center text */
+    width: 100%; /* Full width */
+    margin-top: 10px; /* Top margin */
+}
+
+.collapsible-objective {
+    display: none; /* Hide by default */
+}
+canvas {
+    border: 2px solid #e4e4e4;
+    background-color: #0f3460;
+    margin-top: 20px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    animation: fadeIn 1s ease-in-out;
+}
+#mobileControls {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.control-btn {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 20px;
+    margin: 5px;
+    font-size: 20px;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+.control-btn:active {
+    background-color: #3e8e41;
+}
+@media only screen and (max-width: 600px) {
+    #gameCanvas {
+        width: 100%;
+        height: auto;
+    }
+    #mobileControls {
+        display: flex;
+    }
+}
